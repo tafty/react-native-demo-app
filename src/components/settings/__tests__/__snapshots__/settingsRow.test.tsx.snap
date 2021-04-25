@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SettingsRow should render the row 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "marginVertical": 8,
+      "opacity": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "rgba(0, 124, 255, 1)",
+        "borderColor": "rgba(0, 124, 255, 1)",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "padding": 16,
+      }
+    }
+    testID="The title-button"
+  >
+    <Text
+      style={
+        Object {
+          "color": "rgba(255, 255, 255, 1)",
+          "flex": 0,
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "textAlign": "center",
+        }
+      }
+      testID="The title-button-label"
+    >
+      THE TITLE
+    </Text>
+  </View>
+</View>
+`;

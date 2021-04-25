@@ -1,0 +1,15 @@
+{
+  "$meta": {
+    "description": "Demo App"
+  },
+  "api": {
+    "remoteConfigUri": "",
+    "key": "",
+    "isStubbed": true,
+    "isRemoteConfigEnabled": false
+  },
+  "environment": "dev",
+  "realm": {
+    "encrypted": false
+  }
+}

@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginInput should render as insecure 1`] = `
+<View
+  style={
+    Array [
+      undefined,
+      Object {
+        "flex": 0,
+        "flexDirection": "column",
+      },
+    ]
+  }
+>
+  <View>
+    <TextInput
+      allowFontScaling={true}
+      autoCapitalize="none"
+      onChangeText={[Function]}
+      onSubmitEditing={[Function]}
+      placeholder="Email address"
+      rejectResponderTermination={true}
+      secureTextEntry={false}
+      style={
+        Object {
+          "backgroundColor": "rgba(255, 255, 255, 1)",
+          "borderColor": "rgba(208, 208, 208, 1)",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "fontSize": 16,
+          "paddingLeft": 16,
+          "paddingRight": 46,
+          "paddingVertical": 16,
+        }
+      }
+      testID="test-ID-input"
+      underlineColorAndroid="transparent"
+      value="email"
+    />
+  </View>
+</View>
+`;
+
+exports[`LoginInput should render as secure 1`] = `
+<View
+  style={
+    Array [
+      undefined,
+      Object {
+        "flex": 0,
+        "flexDirection": "column",
+      },
+    ]
+  }
+>
+  <View>
+    <TextInput
+      allowFontScaling={true}
+      autoCapitalize="none"
+      onChangeText={[Function]}
+      onSubmitEditing={[Function]}
+      placeholder="Password"
+      rejectResponderTermination={true}
+      secureTextEntry={true}
+      style={
+        Object {
+          "backgroundColor": "rgba(255, 255, 255, 1)",
+          "borderColor": "rgba(208, 208, 208, 1)",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "fontSize": 16,
+          "paddingLeft": 16,
+          "paddingRight": 46,
+          "paddingVertical": 16,
+        }
+      }
+      testID="test-ID-input"
+      underlineColorAndroid="transparent"
+      value="password"
+    />
+    <Text
+      allowFontScaling={false}
+      onPress={[Function]}
+      style={
+        Array [
+          Object {
+            "color": undefined,
+            "fontSize": 20,
+          },
+          Object {
+            "color": "rgba(0, 124, 255, 1)",
+            "position": "absolute",
+            "right": 16,
+            "top": 16,
+          },
+          Object {
+            "fontFamily": "Ionicons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          Object {},
+        ]
+      }
+    >
+      
+    </Text>
+  </View>
+</View>
+`;

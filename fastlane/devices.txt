@@ -1,0 +1,2 @@
+Device ID	Device Name
+00008020-00180CA41A03002E	Gareth's iPad Mini 5

@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DiagnosticsRow should render the row 1`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "rgba(246, 246, 246, 1)",
+      "borderBottomWidth": 1,
+      "flex": 0,
+      "flexDirection": "column",
+      "justifyContent": "space-between",
+      "padding": 8,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "fontSize": 16,
+      }
+    }
+    testID="The title-title"
+  >
+    The title
+  </Text>
+  <Text
+    style={
+      Object {
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "textAlign": "right",
+      }
+    }
+    testID="The title-value"
+  >
+    The value
+  </Text>
+</View>
+`;

@@ -1,0 +1,19 @@
+{
+  "$meta": {
+    "description": "Demo App"
+  },
+  "api": {
+    "uri": "http://localhost:18083/v1",
+    "timeoutsInSeconds": [
+      { "key": "default", "value": 120 },
+      { "key": "authentication", "value": 120 },
+      { "key": "configuration", "value": 120 }
+    ]
+  },
+  "configuration": {},
+  "security": {
+    "sessionTimeOutInMinutes": 60,
+    "hasEnforcedLoginOnForeground": true,
+    "isOfflineLoginEnabled": true
+  }
+}

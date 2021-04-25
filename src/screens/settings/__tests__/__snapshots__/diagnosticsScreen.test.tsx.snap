@@ -1,0 +1,869 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Diagnostics Screen Should inform that stubs are in use 1`] = `
+<RCTScrollView
+  style={
+    Object {
+      "backgroundColor": "rgba(246, 246, 246, 1)",
+      "flex": 1,
+    }
+  }
+>
+  <View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="Configuration API Location-title"
+      >
+        Configuration API Location
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="Configuration API Location-value"
+      >
+        Using internal stub
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="Environment-title"
+      >
+        Environment
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="Environment-value"
+      >
+        test
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="API End Point-title"
+      >
+        API End Point
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="API End Point-value"
+      >
+        Using internal stub
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="Device Brand-title"
+      >
+        Device Brand
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="Device Brand-value"
+      >
+        Apple
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="Device Model-title"
+      >
+        Device Model
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="Device Model-value"
+      >
+        iPhone 6
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="Device OS-title"
+      >
+        Device OS
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="Device OS-value"
+      >
+        iOS
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="Device OS Version-title"
+      >
+        Device OS Version
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="Device OS Version-value"
+      >
+        12.0
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="App Version-title"
+      >
+        App Version
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="App Version-value"
+      >
+        1.0.2
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="Build Number-title"
+      >
+        Build Number
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="Build Number-value"
+      >
+        10000002
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="Device ID-title"
+      >
+        Device ID
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="Device ID-value"
+      >
+        this_is_a_unique_device_id
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="Git Hash-title"
+      >
+        Git Hash
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="Git Hash-value"
+      >
+        dd8ad0e
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="Build Date-title"
+      >
+        Build Date
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="Build Date-value"
+      >
+        Mon Feb 10 2020 17:18:17 GMT+0000
+      </Text>
+    </View>
+  </View>
+</RCTScrollView>
+`;
+
+exports[`Diagnostics Screen Should render values from state 1`] = `
+<RCTScrollView
+  style={
+    Object {
+      "backgroundColor": "rgba(246, 246, 246, 1)",
+      "flex": 1,
+    }
+  }
+>
+  <View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="Configuration API Location-title"
+      >
+        Configuration API Location
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="Configuration API Location-value"
+      >
+        localhost://uri
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="Environment-title"
+      >
+        Environment
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="Environment-value"
+      >
+        test
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="API End Point-title"
+      >
+        API End Point
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="API End Point-value"
+      >
+        https://uri
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="Device Brand-title"
+      >
+        Device Brand
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="Device Brand-value"
+      >
+        Apple
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="Device Model-title"
+      >
+        Device Model
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="Device Model-value"
+      >
+        iPhone 6
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="Device OS-title"
+      >
+        Device OS
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="Device OS-value"
+      >
+        iOS
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="Device OS Version-title"
+      >
+        Device OS Version
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="Device OS Version-value"
+      >
+        12.0
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="App Version-title"
+      >
+        App Version
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="App Version-value"
+      >
+        1.0.2
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="Build Number-title"
+      >
+        Build Number
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="Build Number-value"
+      >
+        10000002
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="Device ID-title"
+      >
+        Device ID
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="Device ID-value"
+      >
+        this_is_a_unique_device_id
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="Git Hash-title"
+      >
+        Git Hash
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="Git Hash-value"
+      >
+        dd8ad0e
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "rgba(246, 246, 246, 1)",
+          "borderBottomWidth": 1,
+          "flex": 0,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+        testID="Build Date-title"
+      >
+        Build Date
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "right",
+          }
+        }
+        testID="Build Date-value"
+      >
+        Mon Feb 10 2020 17:18:17 GMT+0000
+      </Text>
+    </View>
+  </View>
+</RCTScrollView>
+`;

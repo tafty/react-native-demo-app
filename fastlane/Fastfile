@@ -1,0 +1,491 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+# Customise this file, documentation can be found here:
+# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
+# All available actions: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Actions.md
+# can also be listed using the `fastlane actions` command
+
+# Change the syntax highlighting to Ruby
+# All lines starting with a # are ignored when running `fastlane`
+
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+fastlane_version "2.141.0"
+
+fastlane_require "json"
+fastlane_require "xcodeproj"
+
+require 'fileutils'
+
+default_platform :ios
+
+# Project configuration
+APP_IDENTIFIER = "com.sixtyfourthpixel.demoapp"
+APP_DISPLAY_NAME = "Demo App"
+APP_XCODE_PROJECT_NAME = "DemoApp"
+APP_XCODE_PROJECT_FILE = "./ios/" + APP_XCODE_PROJECT_NAME + ".xcodeproj"
+APP_XCODE_WORKSPACE_FILE = "./ios/" + APP_XCODE_PROJECT_NAME + ".xcworkspace"
+APP_XCODE_INFO_PLIST = APP_XCODE_PROJECT_NAME + "/Info.plist"
+APP_XCODE_IMAGE_ASSETS = "**/ios/" + APP_XCODE_PROJECT_NAME + "/Images.xcassets/**/*.{png,PNG}"
+APP_XCODE_BINARY = APP_XCODE_PROJECT_NAME + ".app.dSYM"
+
+# Apple configuration
+APPLE_TEAM_ID = "LR9EPXBWY7"
+APPLE_USER_EMAIL = "gareth.taft@gmail.com"
+
+# Indicates whether the local git repository will be reset following each build
+RESET_GIT_ENABLED = false
+
+LOCAL_CONFIG_FILE = "../src/config/config.json"
+DEFAULT_REMOTE_CONFIG_FILE = "../src/config/defaultRemoteConfig.json"
+
+# TODO Ideally the API key should be stored and retrieved securely
+# API Key
+API_KEY = "API_KEY"
+
+# API end points
+#
+# If "api"."isRemoteConfigEnabled" is set to false in the LOCAL_CONFIG_FILE these URIs should be the root of the API and they will be written to the "api"."uri" key in DEFAULT_REMOTE_CONFIG_FILE
+#
+# If "api"."isRemoteConfigEnabled" is set to true in the LOCAL_CONFIG_FILE these URIs should be the URI of the config service/file and they will be written to the "api"."remoteConfigUri" key in LOCAL_CONFIG_FILE
+#
+# See the update_config action for the implementation of the above
+PRODUCTION_URI = "https://localhost/production/"
+QC_URI = "https://localhost/qc/"
+
+# Badge constants
+badge_color_qc = "green"
+
+# Release note configuration
+@CHANGE_LOG_UPLOAD_SIZE = 5000
+
+# Firebase configuration
+@UPLOAD_TO_FIREBASE_ENABLED = false
+FIREBASE_APP_ID_ANDROID_PRODUCTION = "PLACEHOLDER_APP_ID_ANDROID_PRODUCTION"
+FIREBASE_APP_ID_ANDROID_QC = "PLACEHOLDER_APP_ID_ANDROID_QC"
+FIREBASE_APP_ID_IOS_PRODUCTION = "PLACEHOLDER_APP_ID_IOS_PRODUCTION"
+FIREBASE_APP_ID_IOS_QC = "PLACEHOLDER_APP_ID_IOS_QC"
+
+# iOS lanes
+platform :ios do
+  lane :build_production do
+    perform_build_and_release({
+      app_identifier: APP_IDENTIFIER,
+      config_endpoint: PRODUCTION_URI,
+      run_badge: false,
+      display_name: APP_DISPLAY_NAME,
+      env: "production",
+      realm_encrypted: true,
+      firebase_app_id: FIREBASE_APP_ID_IOS_PRODUCTION
+    })
+  end
+
+  lane :build_and_release_qc do
+   perform_build_and_release({
+     app_identifier: APP_IDENTIFIER + ".qc",
+     config_endpoint: QC_URI,
+     badge_env: "QC",
+     run_badge: true,
+     badge_shield_colour: badge_color_qc,
+     display_name: APP_DISPLAY_NAME + " QC",
+     env: "qc",
+     realm_encrypted: false,
+     firebase_app_id: FIREBASE_APP_ID_IOS_QC
+   })
+  end
+
+  lane :perform_build_and_release do |options|
+    FastlaneCore::PrintTable.print_values(
+      config: options,
+      title: 'Perform build & release'
+    )
+
+    app_identifier = options[:app_identifier]
+    config_endpoint = options[:config_endpoint]
+    badge_env = options[:badge_env]
+    run_badge = options[:run_badge]
+    badge_shield_colour = options[:badge_shield_colour]
+    display_name = options[:display_name]
+    env = options[:env]
+    realm_encrypted = options[:realm_encrypted]
+    firebase_app_id = options[:firebase_app_id]
+
+    update_ios_version
+    generate_metadata_file
+
+    match(app_identifier: app_identifier, type: "adhoc", force_for_new_devices: true, team_id: APPLE_TEAM_ID, readonly: true)
+    update_provisioning_profile_settings({
+      app_identifier: app_identifier
+    })
+
+    # TODO Ideally the API key should be different per environment and stored & retrieved securely
+
+    update_config(API_KEY, config_endpoint, env, realm_encrypted)
+
+    if @UPLOAD_TO_FIREBASE_ENABLED
+      FileUtils.cp(
+        "firebase/ios/" + env + "/GoogleService-Info.plist",
+        "../ios/"
+      )
+
+      # Check that the BUNDLE_ID in the GoogleServices-Info.plist matches the supplied app_identifier
+      bundle_id = get_info_plist_value(path: "./ios/GoogleService-Info.plist", key: "BUNDLE_ID")
+
+      if bundle_id != app_identifier
+        UI.user_error!("BUNDLE_ID '" + bundle_id + "' in GoogleService-Info.plist for environment'" + env + "' does not match app_identifier: '" + app_identifier + "'")
+      end
+    end
+
+    build_ipa({
+      env: badge_env,
+      app_identifier: app_identifier,
+      run_badge: run_badge,
+      shield_colour: badge_shield_colour,
+      display_name: display_name
+    })
+
+    # Distribute
+    distribute_to_firebase({
+      firebase_app_id: firebase_app_id
+    })
+
+    package_version = get_package_json_version
+    options = {
+      glob: ["*.ipa", "*.dSYM.zip"],
+      env: env,
+      package_version: package_version
+    }
+
+    collect_binaries(options);
+
+    if RESET_GIT_ENABLED
+      reset_git_repo(skip_clean: true, force: true)
+    end
+  end
+
+  desc "Updates the version number in the iOS project"
+  lane :update_ios_version do
+    package_version = get_package_json_version
+    version_code = get_version_code
+    increment_version_number(xcodeproj: APP_XCODE_PROJECT_FILE, version_number: package_version)
+    increment_build_number(xcodeproj: APP_XCODE_PROJECT_FILE, build_number: version_code)
+  end
+
+  lane :certificates do
+    match(readonly: true)
+  end
+
+  lane :refresh_devices do
+    register_devices(team_id: APPLE_TEAM_ID, username: APPLE_USER_EMAIL, devices_file: "./fastlane/devices.txt")
+    match(type: "adhoc", force_for_new_devices: true)
+  end
+
+  lane :build_ipa do |options|
+    FastlaneCore::PrintTable.print_values(
+      config: options,
+      title: 'Build IPA'
+    )
+
+    cocoapods(
+      podfile: './ios/Podfile'
+    )
+
+    update_app_identifier(xcodeproj: APP_XCODE_PROJECT_FILE, app_identifier: options[:app_identifier], plist_path: APP_XCODE_INFO_PLIST)
+    update_info_plist(xcodeproj: APP_XCODE_PROJECT_FILE, display_name: options[:display_name], plist_path: APP_XCODE_INFO_PLIST)
+    match(app_identifier: options[:app_identifier], type: "adhoc", force_for_new_devices: true, team_id: APPLE_TEAM_ID, readonly: true)
+
+    if options[:run_badge]
+      version_number = get_version_number(xcodeproj: APP_XCODE_PROJECT_FILE, target: APP_XCODE_PROJECT_NAME)
+      shield_text = options[:env] + "-" + version_number + "-" + options[:shield_colour]
+      add_badge(shield: shield_text, no_badge: true, glob: APP_XCODE_IMAGE_ASSETS)
+    end
+
+    gym(
+      scheme: APP_XCODE_PROJECT_NAME,
+      workspace: APP_XCODE_WORKSPACE_FILE,
+      export_method: "ad-hoc",
+      silent: true
+    )
+  end
+
+  lane :distribute_to_firebase do |options|
+    if @UPLOAD_TO_FIREBASE_ENABLED
+      FastlaneCore::PrintTable.print_values(
+        config: options,
+        title: 'Distribute to Firebase'
+      )
+
+      firebase_app_id = options[:firebase_app_id]
+      
+      change_log_file ="change_log.txt"
+      change_log = read_change_log(true)
+
+      File.open(change_log_file,"w") do |f|
+        f.write(change_log)
+      end
+
+      firebase_app_distribution(
+        app: firebase_app_id,
+        ipa_path: APP_XCODE_PROJECT_NAME + ".ipa",
+        release_notes_file: "fastlane/" + change_log_file
+      )
+    end
+  end
+end
+
+# Android
+platform :android do
+  lane :build_production do
+    perform_build_and_release({
+      config_endpoint: PRODUCTION_URI,
+      gradle_task: "assembleProductionRelease",
+      run_badge: false,
+      flavor: "production",
+      realm_encrypted: true,
+      firebase_app_id: FIREBASE_APP_ID_ANDROID_PRODUCTION
+    })
+  end
+
+  lane :build_and_release_qc do
+    perform_build_and_release({
+      config_endpoint: QC_URI,
+      gradle_task: "assembleQcRelease",
+      badge_env: "QC",
+      run_badge: true,
+      badge_shield_colour: badge_color_qc,
+      flavor: "qc",
+      realm_encrypted: false,
+      firebase_app_id: FIREBASE_APP_ID_ANDROID_QC
+    })
+  end
+
+  lane :perform_build_and_release do |options|
+    FastlaneCore::PrintTable.print_values(
+      config: options,
+      title: 'Perform build & release'
+    )
+
+    config_endpoint = options[:config_endpoint]
+    config_playback_speed = options[:config_playback_speed]
+    badge_env = options[:badge_env]
+    gradle_task = options[:gradle_task]
+    run_badge = options[:run_badge]
+    badge_shield_colour = options[:badge_shield_colour]
+    flavor = options[:flavor]
+    realm_encrypted = options[:realm_encrypted]
+    firebase_app_id = options[:firebase_app_id]
+
+    # TODO Ideally the API key should be different per environment and stored & retrieved securely
+
+    update_config(API_KEY, config_endpoint, flavor, realm_encrypted)
+
+    build_release({
+      gradle_task: gradle_task,
+      env: badge_env,
+      run_badge: run_badge,
+      shield_colour: badge_shield_colour
+    })
+
+    # Distribute
+    distribute_to_firebase({
+      flavor: flavor,
+      firebase_app_id: firebase_app_id
+    })
+
+    package_version = get_package_json_version
+
+    options = {
+      glob: ["./android/app/build/outputs/apk/" + flavor + "/release/*.apk"],
+      env: flavor,
+      package_version: package_version
+    }
+
+    collect_binaries(options)
+
+    if RESET_GIT_ENABLED
+      reset_git_repo(skip_clean: true, force: true)
+    end
+  end
+
+  lane :build_release do |options|
+    FastlaneCore::PrintTable.print_values(
+      config: options,
+      title: 'Build Android Release'
+    )
+
+    generate_metadata_file
+
+    if options[:run_badge]
+      version_number = get_package_json_version
+      shield_text = options[:env] + "-" + version_number + "-" + options[:shield_colour]
+      add_badge(shield: shield_text, no_badge: true, glob: "**/android/app/src/main/res/**/*.{png,PNG}")
+    end
+
+    gradle(task: "clean", project_dir: "android/")
+    gradle(task: options[:gradle_task], project_dir: "android/", flags: "--stacktrace --no-daemon")
+  end
+
+  lane :distribute_to_firebase do |options|
+    if @UPLOAD_TO_FIREBASE_ENABLED
+      FastlaneCore::PrintTable.print_values(
+        config: options,
+        title: 'Distribute to Firebase'
+      )
+
+      flavor = options[:flavor]
+      firebase_app_id = options[:firebase_app_id]
+      
+      apk_path = "./android/app/build/outputs/apk/" + flavor + "/release/app-" + flavor + "-release.apk"
+
+      change_log_file ="change_log.txt"
+      change_log = read_change_log(true)
+
+      File.open(change_log_file,"w") do |f|
+        f.write(change_log)
+      end
+
+      firebase_app_distribution(
+        app: firebase_app_id,
+        apk_path: apk_path,
+        release_notes_file: "fastlane/" + change_log_file
+      )
+    end
+  end
+end
+
+def badge_icon(options)
+  version_number = options["version_number"]
+  shield_text = options["shield_text"]
+  add_badge(shield: shield_text, no_badge: true, glob: APP_XCODE_IMAGE_ASSETS)
+end
+
+def collect_binaries(options)
+  puts(options)
+
+  copy_artifacts(
+    keep_original: true,
+    target_path: "artifacts/tmp",
+    artifacts: options[:glob],
+    fail_on_missing: true
+  );
+
+  target_path = File.expand_path("../artifacts")
+  source_path = File.expand_path("../artifacts/tmp")
+  Dir.glob(source_path + "/*").sort.each do |f|
+      if (File.basename(f, File.extname(f)) == APP_XCODE_BINARY)
+        File.rename(f, target_path + "/" + APP_XCODE_PROJECT_NAME.downcase + "-" + options[:env] + "-" + options[:package_version] + ".app.dSYM" + File.extname(f))
+      else
+        File.rename(f, target_path + "/" + APP_XCODE_PROJECT_NAME.downcase + "-" + options[:env] + "-" + options[:package_version] + File.extname(f))
+      end
+  end
+end
+
+def get_package_json_version()
+  file = File.read("../package.json")
+  data_hash = JSON.parse(file)
+  data_hash["version"]
+end
+
+def get_package_json_version_hash()
+   version_string = get_package_json_version
+   version = version_string.split('.')
+   version[0] = version[0].to_i
+   version[1] = version[1].to_i
+   version[2] = version[2].to_i
+
+   version
+end
+
+def get_version_code()
+  version = get_package_json_version_hash
+
+  versionMajor = version[0] * 1000000
+  versionMinor = version[1] * 1000
+  versionPatch = version[2]
+  versionCode = versionMajor + versionMinor + versionPatch
+  puts versionCode
+   versionCode
+end
+
+def read_change_log(remove_markdown = false)
+  package_version = get_package_json_version
+  major_minor_version = package_version[0, package_version.rindex('.')]
+  change_log = File.read("../CHANGELOG-" + major_minor_version + ".md")
+
+  # Truncate to the last full version changelog entry before 5000 characters
+  if change_log.length >= @CHANGE_LOG_UPLOAD_SIZE
+    change_log = change_log[0, @CHANGE_LOG_UPLOAD_SIZE - 1]
+    index = change_log.rindex(/^## Version/)
+    change_log = change_log[0, index]
+  end
+
+  if remove_markdown
+    # Remove markdown formatting
+    change_log = change_log.gsub(/^## /, "")
+    change_log = change_log.gsub(/^# /, "")
+    change_log = change_log.gsub(/^- /, "")
+  end
+
+  change_log
+end
+
+def update_config(api_key, endpoint, environment, realm_encrypted)
+  config = File.read(LOCAL_CONFIG_FILE)
+  config_hash = JSON.parse(config)
+  config_hash["api"]["key"] = api_key
+  config_hash["environment"] = environment
+  config_hash["realm"]["encrypted"] = realm_encrypted
+
+  if config_hash["api"]["isRemoteConfigEnabled"]
+    config_hash["api"]["configuration"] = endpoint
+  else
+    defaultRemoteConfig = File.read(DEFAULT_REMOTE_CONFIG_FILE)
+    defaultRemoteConfig_hash = JSON.parse(defaultRemoteConfig)
+    defaultRemoteConfig_hash["api"]["uri"] = endpoint
+
+    File.open(DEFAULT_REMOTE_CONFIG_FILE,"w") do |f|
+      f.write(defaultRemoteConfig_hash.to_json)
+    end
+  end
+
+  File.open(LOCAL_CONFIG_FILE,"w") do |f|
+    f.write(config_hash.to_json)
+  end
+end
+
+def update_provisioning_profile_settings(options)
+  app_identifier = options[:app_identifier]
+  options = {
+    new_specifier: "match AdHoc " + app_identifier,
+    xcodeproj: APP_XCODE_PROJECT_FILE,
+    target: APP_XCODE_PROJECT_NAME,
+    configuration: "Release"
+  }
+
+  update_provisioning_profile(options)
+
+  options = {
+    new_specifier: "match Development " + app_identifier,
+    xcodeproj: APP_XCODE_PROJECT_FILE,
+    target: APP_XCODE_PROJECT_NAME,
+    configuration: "Debug"
+  }
+
+  update_provisioning_profile(options)
+end
+
+def generate_metadata_file()
+   commit = last_git_commit
+   short_hash = commit[:abbreviated_commit_hash] # short sha of commit
+   tempHash = {
+      "git_commit" => short_hash,
+      "build_date" => Time.now.strftime('%Y-%m-%dT%H:%M:%S.%L%z')
+  }
+
+  File.open("../src/metadata.json","w") do |f|
+    f.write(tempHash.to_json)
+  end
+end

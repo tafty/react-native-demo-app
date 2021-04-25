@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavigationActionOverlayScreen Screen Should render 1`] = `
+<RCTScrollView
+  style={
+    Object {
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "flex": 1,
+    }
+  }
+>
+  <View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "flex": 1,
+          "height": 1334,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View />
+    </View>
+  </View>
+</RCTScrollView>
+`;

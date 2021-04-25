@@ -1,0 +1,197 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button should render disabled 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "rgba(208, 208, 208, 1)",
+        "borderColor": "rgba(128, 128, 128, 1)",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "padding": 16,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "rgba(128, 128, 128, 1)",
+          "flex": 0,
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "textAlign": "center",
+        }
+      }
+      testID="test-id-label"
+    >
+      PHOTOS
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Button should render disabled with an activity indicator 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "rgba(208, 208, 208, 1)",
+        "borderColor": "rgba(128, 128, 128, 1)",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "padding": 16,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "rgba(128, 128, 128, 1)",
+          "flex": 0,
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "textAlign": "center",
+        }
+      }
+      testID="test-id-label"
+    >
+      <ActivityIndicator
+        animating={true}
+        color="#999999"
+        hidesWhenStopped={true}
+        size="small"
+        style={
+          Object {
+            "color": "rgba(128, 128, 128, 1)",
+            "flex": 0,
+            "marginRight": 8,
+          }
+        }
+      />
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Button should render enabled 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "rgba(0, 124, 255, 1)",
+        "borderColor": "rgba(0, 124, 255, 1)",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "padding": 16,
+      }
+    }
+    testID="test-id"
+  >
+    <Text
+      style={
+        Object {
+          "color": "rgba(255, 255, 255, 1)",
+          "flex": 0,
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "textAlign": "center",
+        }
+      }
+      testID="test-id-label"
+    >
+      PHOTOS
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Button should render enabled with an activity indicator 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "rgba(0, 124, 255, 1)",
+        "borderColor": "rgba(0, 124, 255, 1)",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "padding": 16,
+      }
+    }
+    testID="test-id"
+  >
+    <Text
+      style={
+        Object {
+          "color": "rgba(255, 255, 255, 1)",
+          "flex": 0,
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "textAlign": "center",
+        }
+      }
+      testID="test-id-label"
+    >
+      <ActivityIndicator
+        animating={true}
+        color="#999999"
+        hidesWhenStopped={true}
+        size="small"
+        style={
+          Object {
+            "color": "rgba(0, 124, 255, 1)",
+            "flex": 0,
+            "marginRight": 8,
+          }
+        }
+      />
+    </Text>
+  </View>
+</View>
+`;

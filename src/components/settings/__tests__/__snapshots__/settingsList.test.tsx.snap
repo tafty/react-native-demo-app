@@ -1,0 +1,176 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SettingsList should render the row 1`] = `
+<RCTScrollView
+  data={
+    Array [
+      Object {
+        "onPress": [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        },
+        "title": "title1",
+      },
+      Object {
+        "onPress": [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        },
+        "title": "title2",
+      },
+    ]
+  }
+  disableVirtualization={false}
+  getItem={[Function]}
+  getItemCount={[Function]}
+  horizontal={false}
+  initialNumToRender={10}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={10}
+  onContentSizeChange={[Function]}
+  onEndReachedThreshold={2}
+  onLayout={[Function]}
+  onMomentumScrollEnd={[Function]}
+  onScroll={[Function]}
+  onScrollBeginDrag={[Function]}
+  onScrollEndDrag={[Function]}
+  removeClippedSubviews={false}
+  renderItem={[Function]}
+  scrollEventThrottle={50}
+  stickyHeaderIndices={Array []}
+  style={
+    Object {
+      "flex": 1,
+      "paddingHorizontal": 32,
+    }
+  }
+  updateCellsBatchingPeriod={50}
+  viewabilityConfigCallbackPairs={Array []}
+  windowSize={21}
+>
+  <View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "marginVertical": 8,
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "rgba(0, 124, 255, 1)",
+              "borderColor": "rgba(0, 124, 255, 1)",
+              "borderRadius": 4,
+              "borderWidth": 1,
+              "flex": 1,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "padding": 16,
+            }
+          }
+          testID="title1-button"
+        >
+          <Text
+            style={
+              Object {
+                "color": "rgba(255, 255, 255, 1)",
+                "flex": 0,
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "textAlign": "center",
+              }
+            }
+            testID="title1-button-label"
+          >
+            TITLE1
+          </Text>
+        </View>
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "marginVertical": 8,
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "rgba(0, 124, 255, 1)",
+              "borderColor": "rgba(0, 124, 255, 1)",
+              "borderRadius": 4,
+              "borderWidth": 1,
+              "flex": 1,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "padding": 16,
+            }
+          }
+          testID="title2-button"
+        >
+          <Text
+            style={
+              Object {
+                "color": "rgba(255, 255, 255, 1)",
+                "flex": 0,
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "textAlign": "center",
+              }
+            }
+            testID="title2-button-label"
+          >
+            TITLE2
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</RCTScrollView>
+`;

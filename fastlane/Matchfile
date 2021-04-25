@@ -1,0 +1,9 @@
+git_url "PLACEHOLDER_MATCH_GIT_URL"
+
+type "development" # The default type, can be: appstore, adhoc, enterprise or development
+app_identifier ["com.sixtyfourthpixel.demoapp", "com.sixtyfourthpixel.demoapp.qc"]
+username "gareth.taft@gmail.com" # Your Apple Developer Portal username
+team_id "LR9EPXBWY7" # Apple team ID
+
+# For all available options run `fastlane match --help`
+# Remove the # in the beginning of the line to enable the other options
